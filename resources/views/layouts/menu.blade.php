@@ -21,3 +21,9 @@
         <a href="{!! route('app.backups.index') !!}"><i class="fa fa-jsfiddle"></i><span>Backup</span></a>
     </li>
 @endcan
+
+@can('app.offices.index')
+    <li class="{{ Request::is('app/offices*') ? 'active' : '' }}">
+        <a href="{!! route('app.offices.index') !!}"><i class="fa fa-briefcase"></i><span>Office</span></a>
+    </li>
+@endcan

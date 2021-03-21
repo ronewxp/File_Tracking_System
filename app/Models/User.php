@@ -45,6 +45,11 @@ class User extends Authenticatable implements HasMedia
             ->singleFile();
     }
 
+    public function office()
+    {
+        return $this->hasMany(Office::class);
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class);

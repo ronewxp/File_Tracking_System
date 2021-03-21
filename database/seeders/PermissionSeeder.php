@@ -91,5 +91,29 @@ class PermissionSeeder extends Seeder
             'slug' => 'app.backup.destroy',
         ]);
 
+
+        $moduleAppOffice = Module::updateOrCreate(['name' => 'Office Management']);
+        Permission::updateOrCreate([
+            'module_id' => $moduleAppOffice->id,
+            'name' => 'Access Office',
+            'slug' => 'app.offices.index',
+        ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleAppOffice->id,
+            'name' => 'Create Office',
+            'slug' => 'app.offices.create',
+        ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleAppOffice->id,
+            'name' => 'Edit Office',
+            'slug' => 'app.offices.edit',
+        ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleAppOffice->id,
+            'name' => 'Delete Office',
+            'slug' => 'app.offices.destroy',
+        ]);
+        
+
     }
 }

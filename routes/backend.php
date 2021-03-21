@@ -4,6 +4,7 @@ use App\Http\Controllers\BackupController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OfficesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/dashboard', [dashboardController::class, 'index' ])->name('dashboard');
 Route::resource('roles', RoleController::class);
 Route::resource('users', UserController::class);
+Route::resource('offices', OfficesController::class);
+
+
+
 // Backups
 Route::resource('backups', BackupController::class)->only(['index', 'store', 'destroy']);
 Route::get('backups/{file_name}', [BackupController::class, 'download'])->name('backups.download');
