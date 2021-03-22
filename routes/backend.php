@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BackupController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OfficesController;
@@ -32,3 +33,7 @@ Route::resource('backups', BackupController::class)->only(['index', 'store', 'de
 Route::get('backups/{file_name}', [BackupController::class, 'download'])->name('backups.download');
 Route::delete('backups', [BackupController::class, 'clean'])->name('backups.clean');
 
+
+// Profile
+Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::post('profile', [ProfileController::class, 'update'])->name('profile.update');

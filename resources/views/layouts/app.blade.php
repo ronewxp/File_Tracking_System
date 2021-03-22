@@ -63,8 +63,9 @@
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
-                                    <img width="40" height="40" class="img-circle" src="{{ Auth::user()->getFirstMediaUrl('avatar')}}"
-                                         alt="">
+                                    <img width="40" height="40" class="img-circle" src="{{ Auth::user()->getFirstMediaUrl('avatar') != null ? Auth::user()->getFirstMediaUrl('avatar') : config('app.placeholder').'160.ping'}}"
+                                         alt="avatar">
+                                         
                                     <p>
                                         {{ Auth::user()->name }}
                                         <small>Member since {{ Auth::user()->created_at->format('M. Y') }}</small>
@@ -76,7 +77,7 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                        <a href="{{route('app.profile.index')}}" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
                                         <a href="{{ url('/logout') }}" class="btn btn-default btn-flat"

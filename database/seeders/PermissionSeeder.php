@@ -113,6 +113,19 @@ class PermissionSeeder extends Seeder
             'name' => 'Delete Office',
             'slug' => 'app.offices.destroy',
         ]);
+
+        $moduleAppProfile = Module::updateOrCreate(['name' => 'Profile']);
+        Permission::updateOrCreate([
+            'module_id' => $moduleAppProfile->id,
+            'name' => 'Profile Update',
+            'slug' => 'app.profile.update',
+        ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleAppProfile->id,
+            'name' => 'Password Change',
+            'slug' => 'app.profile.password',
+        ]);
+        
         
 
     }

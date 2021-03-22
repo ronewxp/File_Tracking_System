@@ -95,7 +95,7 @@
                                                     <i class="fa fa-edit"></i> Edit
                                                 </a>
                                             @endcan
-{{--                                            @if($role->deletable == true)--}}
+                                            @if($user->role->deletable == true)
                                             @can('app.users.destroy')
                                                 <button type="button" class="btn btn-danger btn-sm" onclick="deleteData({{$user->id}})">
                                                     <i class="fa fa-trash-o"></i> Delete
@@ -106,7 +106,7 @@
                                                     @method('DELETE')
 
                                                 </form>
-{{--                                            @endif--}}
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
