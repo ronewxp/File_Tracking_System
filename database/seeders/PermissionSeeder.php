@@ -125,6 +125,29 @@ class PermissionSeeder extends Seeder
             'name' => 'Password Change',
             'slug' => 'app.profile.password',
         ]);
+
+
+        $moduleAppFileSubject = Module::updateOrCreate(['name' => 'File Subject Manage']);
+        Permission::updateOrCreate([
+            'module_id' => $moduleAppFileSubject->id,
+            'name' => 'Access File Subject',
+            'slug' => 'app.fileSubject.index',
+        ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleAppFileSubject->id,
+            'name' => 'Create File Subject',
+            'slug' => 'app.fileSubject.create',
+        ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleAppFileSubject->id,
+            'name' => 'Edit File Subject',
+            'slug' => 'app.fileSubject.edit',
+        ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleAppFileSubject->id,
+            'name' => 'Delete File Subject',
+            'slug' => 'app.fileSubject.destroy',
+        ]);
         
         
 

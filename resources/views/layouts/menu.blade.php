@@ -27,3 +27,9 @@
         <a href="{!! route('app.offices.index') !!}"><i class="fa fa-briefcase"></i><span>Office</span></a>
     </li>
 @endcan
+
+@can('app.fileSubject.index')
+    <li class="{{ Request::is('app/fileSubject*') ? 'active' : '' }}">
+        <a href="{!! route('app.fileSubject.index') !!}"><i class="fa fa-files-o"></i><span>File Subject</span></a>
+    </li>
+@endcan

@@ -65,5 +65,7 @@ class ProfileController extends Controller
             notify()->error('Current password not match.', 'Error');
         }
         return redirect()->back();
+
+        //dd($hashedPassword);
     }
 }

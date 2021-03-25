@@ -50,6 +50,11 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(Office::class);
     }
 
+    public function file_subject()
+    {
+        return $this->hasMany(file_subject::class);
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class);

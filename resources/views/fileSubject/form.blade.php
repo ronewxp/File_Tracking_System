@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @push('css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css" integrity="sha512-In/+MILhf6UMDJU4ZhDL0R0fEpsp4D3Le23m6+ujDWXwl3whwpucJG1PEmI3B07nyJx+875ccs+yX2CqQJUxUw==" crossorigin="anonymous" />
+    <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css" integrity="sha512-In/+MILhf6UMDJU4ZhDL0R0fEpsp4D3Le23m6+ujDWXwl3whwpucJG1PEmI3B07nyJx+875ccs+yX2CqQJUxUw==" crossorigin="anonymous" /> -->
     <style>
         .switch {
             position: relative;
@@ -69,19 +70,24 @@
                 <div class="media">
                     <div class="media-left media-middle">
 
-                        <i class="fa fa-users fa-3x text-info"></i>
+                        <i class="fa fa-briefcase fa-3x text-info"></i>
 
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading"><b>Profile</b></h4>
+                        <h4 class="media-heading"><b>File Subject</b></h4>
+                        @if(isset($fileSubject))
+                            Update
+                        @else
+                            Create
+                        @endif
                     </div>
                 </div>
             </div>
 
             <div class="col-md-2 col-md-offset-7">
-                <a href="{{ route('app.profile.password.change') }}" class="btn btn-lg btn-block btn-danger">
+                <a href="{{route('app.fileSubject.index')}}" class="btn btn-lg btn-block btn-danger">
                     <i class="fa fa-arrow-circle-left"></i>
-                    Password Change
+                    Back
                 </a>
             </div>
 
@@ -92,18 +98,20 @@
         <div class="row">
             <!-- Left col -->
             <div class="col-md-12">
-                <form method="POST" action="{{ route('app.profile.update') }}" enctype="multipart/form-data">
+                <form action="{{isset($fileSubject) ? route('app.fileSubject.update',$fileSubject->id) : route('app.fileSubject.store')}}" method="POST" >
                 @csrf
+                @if(isset($fileSubject))
+                    @method('PUT')
+                @endif
                 <!-- TABLE: LATEST ORDERS -->
-                <div class="">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="panel panel-primary">
-                                <div class="panel-heading">Profile Info</div>
+                                <div class="panel-heading">File Subject Info</div>
                                 <div class="panel-body">
-                                    <label for="name">Name</label>
+                                    <label for="name">File Subject Name</label>
                                     <div class="form-group has-feedback{{ $errors->has('name') ? ' has-error' : '' }}">
-                                        <input type="text" class="form-control" name="name" value="{{ Auth::user()->name ?? old('name') }}" placeholder="Name" required >
+                                        <input type="text" class="form-control" name="name" value="{{ $fileSubject->name ?? old('name') }}" placeholder="File Subject Name" required >
 
                                         @if ($errors->has('name'))
                                             <span class="help-block">
@@ -111,47 +119,36 @@
                                         </span>
                                         @endif
                                     </div>
+                                 
+                                    <label for="status">Status</label>
+                                    <div class="form-group has-feedback{{ $errors->has('status') ? ' has-error' : '' }}">
+                                        <label class="switch">
+                                            <input type="checkbox" name="status" checked id="status" @isset($fileSubject){{ $fileSubject->status ==true ? 'checked':'' }} @endisset>
+                                            <span class="slider round"></span>
+                                        </label>
 
-                                    <label for="email">Email</label>
-                                    <div class="form-group has-feedback{{ $errors->has('email') ? ' has-error' : '' }}">
-                                        <input type="email" class="form-control" name="email" value="{{ Auth::user()->email ?? old('email') }}" placeholder="Email" required >
-
-                                        @if ($errors->has('email'))
+                                        @if ($errors->has('status'))
                                             <span class="help-block">
-                                            <strong>{{ $errors->first('email') }}</strong>
+                                            <strong>{{ $errors->first('status') }}</strong>
                                         </span>
                                         @endif
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">Select Role and Status</div>
-                                <div class="panel-body">
-                                    <label for="avatar">Avatar</label>
-                                    <div class="form-group has-feedback{{ $errors->has('avatar') ? ' has-error' : '' }}">
-                                        <input type="file" class="dropify form-control" name="avatar" data-default-file="{{ Auth::user()->getFirstMediaUrl('avatar') ?? '' }}">
 
-                                        @if ($errors->has('avatar'))
-                                            <span class="text-danger">
-                                            <strong>{{ $errors->first('avatar') }}</strong>
-                                        </span>
-                                        @endif
-                                    </div>
-									
                                     <button type="submit" class="btn btn-info btn-lg">
+                                        @if(isset($fileSubject))
                                             <i class="fa fa-arrow-circle-up"></i>
-                                            Profile Update
+                                            File Subject Update
+                                        @else
+                                            <i class="fa fa-plus-circle"></i>
+                                            File Subject Create
+                                        @endif
                                     </button>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- /.box-header -->
-
-
-                </div>
                 <!-- /.box -->
                 </form>
             </div>
@@ -165,12 +162,18 @@
     <!-- /.content -->
 @endsection
 @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js" integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew==" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js" integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew==" crossorigin="anonymous"></script> -->
 
     <script>
-        $(document).ready(function() {
-            $('.dropify').dropify();
-        });
+        // $(document).ready(function() {
+        //     $('.js-example-basic-single').select2({
+        //         placeholder: "Select Role",
+        //         allowClear: true
+        //     });
+
+        //     $('.dropify').dropify();
+        // });
 
     </script>
 
