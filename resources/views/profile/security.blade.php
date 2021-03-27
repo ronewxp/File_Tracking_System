@@ -97,7 +97,7 @@
                 <!-- TABLE: LATEST ORDERS -->
                 <div class="">
                     <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
+                        <div class="col-md-12">
                             <div class="panel panel-primary">
                                 <div class="panel-heading">UPDATE PASSWORD</div>
                                 <div class="panel-body">

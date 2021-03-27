@@ -182,7 +182,7 @@
 
                                     <label for="avatar">Avatar</label>
                                     <div class="form-group has-feedback{{ $errors->has('avatar') ? ' has-error' : '' }}">
-                                        <input type="file" class="dropify form-control" name="avatar" data-default-file="{{isset($user) ? $user->getFirstMediaUrl('avatar') :'' }}" {{!isset($user)? 'required':''}}>
+                                        <input type="file" class="dropify form-control" name="avatar" data-default-file="{{isset($user) ? $user->getFirstMediaUrl('avatar') :'' }}" >
 
                                         @if ($errors->has('avatar'))
                                             <span class="text-danger">

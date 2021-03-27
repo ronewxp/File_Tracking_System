@@ -33,3 +33,9 @@
         <a href="{!! route('app.fileSubject.index') !!}"><i class="fa fa-files-o"></i><span>File Subject</span></a>
     </li>
 @endcan
+
+@can('app.fileUser.index')
+    <li class="{{ Request::is('app/fileUser*') ? 'active' : '' }}">
+        <a href="{!! route('app.fileUser.index') !!}"><i class="fa fa-file-text-o"></i><span>File User</span></a>
+    </li>
+@endcan

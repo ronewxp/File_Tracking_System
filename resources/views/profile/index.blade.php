@@ -79,8 +79,8 @@
             </div>
 
             <div class="col-md-2 col-md-offset-7">
-                <a href="{{ route('app.profile.password.change') }}" class="btn btn-lg btn-block btn-danger">
-                    <i class="fa fa-arrow-circle-left"></i>
+                <a href="{{ route('app.profile.password.change') }}" class="btn btn-lg btn-block btn-info">
+                    <i class="fa fa-key"></i>
                     Password Change
                 </a>
             </div>

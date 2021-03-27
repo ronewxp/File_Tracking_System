@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Office extends Model
+class FileUser extends Model
 {
     use HasFactory;
-
     protected $guarded = ['id'];
+    
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function file_users()
+    public function office()
     {
-        return $this->hasMany(FileUser::class);
+        return $this->belongsTo(Office::class);
     }
 }

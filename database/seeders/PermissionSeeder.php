@@ -148,6 +148,28 @@ class PermissionSeeder extends Seeder
             'name' => 'Delete File Subject',
             'slug' => 'app.fileSubject.destroy',
         ]);
+
+        $moduleAppFileUser = Module::updateOrCreate(['name' => 'File User Manage']);
+        Permission::updateOrCreate([
+            'module_id' => $moduleAppFileUser->id,
+            'name' => 'Access File User',
+            'slug' => 'app.fileUser.index',
+        ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleAppFileUser->id,
+            'name' => 'Create File User',
+            'slug' => 'app.fileUser.create',
+        ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleAppFileUser->id,
+            'name' => 'Edit File User',
+            'slug' => 'app.fileUser.edit',
+        ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleAppFileUser->id,
+            'name' => 'Delete File User',
+            'slug' => 'app.fileUser.destroy',
+        ]);
         
         
 

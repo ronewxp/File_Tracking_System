@@ -51,7 +51,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users',
             'role' => 'required',
             'password' => 'required|confirmed|min:6',
-            'avatar' => 'required|image',
+            'avatar' => 'nullable|image',
         ]);
         $user = User::create([
             'role_id' => $request->role,

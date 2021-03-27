@@ -55,6 +55,11 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(file_subject::class);
     }
 
+    public function file_users()
+    {
+        return $this->hasMany(FileUser::class);
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class);
